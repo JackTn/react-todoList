@@ -9,8 +9,9 @@
 import React, { Component } from 'react'
 import 'antd/dist/antd.css'
 import store from './store'
-import {handleInputvalAction, handleAddItemAction, handleDeleteItemAction, getTodoList} from './store/actionCreators'
+import {handleInputvalAction, handleAddItemAction, handleDeleteItemAction, handleInitListItem} from './store/actionCreators'
 import TodoListUI from './TodoListUI'
+import axios from 'axios'
 
 class TodoList extends Component {
   constructor(props) {
@@ -34,9 +35,12 @@ class TodoList extends Component {
     )
   }
   componentDidMount () {
-    const action = getTodoList();
-    store.dispatch(action);
+      axios.get('http://localhost.charlesproxy.com:3000/list.json').then((res)=> {
+          const action = handleInitListItem(res.data);
+          store.dispatch(action);
+      })
   }
+
   handleInputval(e){
     const action = handleInputvalAction(e.target.value)
     store.dispatch(action)
