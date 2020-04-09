@@ -9,7 +9,7 @@
 import React, { Component } from 'react'
 import 'antd/dist/antd.css'
 import store from './store'
-import {handleInputvalAction, handleAddItemAction, handleDeleteItemAction, getTodoList} from './store/actionCreators'
+import {handleInputvalAction, handleAddItemAction, handleDeleteItemAction, getTodoListItem} from './store/actionCreators'
 import TodoListUI from './TodoListUI'
 
 class TodoList extends Component {
@@ -34,7 +34,7 @@ class TodoList extends Component {
     )
   }
   componentDidMount () {
-    const action = getTodoList();
+    const action = getTodoListItem();
     store.dispatch(action);
   }
   handleInputval(e){
